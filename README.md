@@ -24,3 +24,12 @@ Usage:
 
 
 
+Relevant links:
+GLUON Toolkit: https://cv.gluon.ai/ - https://github.com/dmlc/gluon-cv
+
+LUCAS Harmonized database:
+  - Article:  https://www.nature.com/articles/s41597-020-00675-z
+  
+    d’Andrimont, R., Yordanov, M., Martinez-Sanchez, L. et al. Harmonised LUCAS in-situ land cover and use database for field surveys from 2006 to 2018 in the European Union. Sci Data 7, 352 (2020). https://doi.org/10.1038/s41597-020-00675-z
+
+  
