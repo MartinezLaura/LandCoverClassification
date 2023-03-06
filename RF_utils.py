@@ -51,7 +51,7 @@ def retrieve_ADE():
     """Retrieves a list of ADE20k classes.
 
     Returns:
-        list: A list of ADE20k classes.
+    - list: A list of ADE20k classes.
     """
 
     ADECLASSES = ("wall", "building", "sky", "floor", "tree",
@@ -225,29 +225,16 @@ def search_params(estimator, param_grid, search, X, y, cv):
 
     Args:
     -----------
-    estimator: estimator object
-        This is the estimator object which should be a classifier or a regressor.
-
-    param_grid: dict
-        Dictionary with parameters names as keys and lists of parameter settings to try as values.
-
-    search: str
-        Type of search to perform. Should be either "grid" for Grid Search or "random" for Random Search.
-
-    X: array-like of shape (n_samples, n_features)
-        Training input samples.
-
-    y: array-like of shape (n_samples,) or (n_samples, n_outputs)
-        Target values (class labels in classification, real numbers in regression).
-
-    cv: int or cross-validation generator
-        Determines the cross-validation splitting strategy.
-        If int, the number of folds. Default is 5.
+    - estimator(estimator object) This is the estimator object which should be a classifier or a regressor.
+    - param_grid(: )dict): Dictionary with parameters names as keys and lists of parameter settings to try as values.
+    - search(str):Type of search to perform. Should be either "grid" for Grid Search or "random" for Random Search.
+    - X(array-like of shape(n_samples, n_features): Training input samples.
+    - y(array-like of shape(n_samples,):  Target values (class labels in classification, real numbers in regression).
+    - cv(int or cross-validation generator_: Determines the cross-validation splitting strategy, If int, the number of folds. Default is 5.
 
     Returns:
     --------
-    clf: estimator instance
-        The estimator instance fitted with the best hyperparameters.
+    - clf()estimator instance): The estimator instance fitted with the best hyperparameters.
     """
     
     try:
@@ -288,12 +275,12 @@ def perm_imp(X, y):
 
     Args:
     -----------
-        X (pandas DataFrame): The input features for the model.
-        y (pandas Series): The target variable for the model.
+    - X(pandas DataFrame): The input features for the model.
+    - y(pandas Series): The target variable for the model.
 
     Returns:
     --------
-        tuple: A tuple of (result, lit), where `result` is the permutation feature importance result, 
+    - tuple: A tuple of (result, lit), where `result` is the permutation feature importance result, 
             and `lit` is a list of feature names that have a non-zero importance.
     """
     
@@ -316,12 +303,12 @@ def erase_empty_cols(results, THRESH = 0):
     
     Args:
     -----------
-        results (pandas.DataFrame): The input DataFrame to process.
-        THRESH (float, optional): A threshold value to replace all values below it with 0.
+    - results(pandas.DataFrame): The input DataFrame to process.
+    - THRESH(float, optional): A threshold value to replace all values below it with 0.
 
     Returns:
     --------
-        pandas.DataFrame: The processed DataFrame with empty columns removed.
+    - pandas.DataFrame: The processed DataFrame with empty columns removed.
     """
 
     results = results.loc[:, ~results.columns.str.contains('^Unnamed')]
@@ -350,15 +337,15 @@ def prepare_set(id_train, id_test, df, wet = False, check_fp = False):
 
     Args:
     -----------
-        id_train (list): A list of ids for the training set.
-        id_test (list): A list of ids for the test set.
-        df (pandas.DataFrame): The data frame containing the features and labels.
-        wet (bool, optional): Indicates whether the data includes WET objects. Defaults to False.
-        check_fp (bool, optional): Indicates whether to check for false positive objects in the test set. Defaults to False.
+    - id_train (list): A list of ids for the training set.
+    - id_test (list): A list of ids for the test set.
+    - df (pandas.DataFrame): The data frame containing the features and labels.
+    - wet (bool, optional): Indicates whether the data includes WET objects. Defaults to False.
+    - check_fp (bool, optional): Indicates whether to check for false positive objects in the test set. Defaults to False.
 
     Returns:
     --------
-        tuple: A tuple containing the training and test sets and their corresponding labels.
+    - tuple: A tuple containing the training and test sets and their corresponding labels.
     """
 
     if wet:
@@ -401,11 +388,11 @@ def plot_relation_feat_LC(results):
 
     Args:
     --------    
-        results (pd.DataFrame): a pandas DataFrame containing the data to be plotted.
+    - results (pd.DataFrame): a pandas DataFrame containing the data to be plotted.
 
     Returns:
     --------
-        None
+    None
     """
 
     plt.rcParams["figure.figsize"] = (15,20)
@@ -457,13 +444,12 @@ def other_class(vals, col, path ):
     
     Args:
     --------    
-        vals (array-like): An array of numerical values.
-        col (array-like): An array of colors corresponding to the values in `vals`.
+    - vals (array-like): An array of numerical values.
+    - col (array-like): An array of colors corresponding to the values in `vals`.
     
     Returns:
     --------    
-        tuple: A tuple containing two arrays: the modified `col` array and an array of 
-           the non-grouped values from `vals`.
+    - tuple: A tuple containing two arrays: the modified `col` array and an array of the non-grouped values from `vals`.
     """
     coll = [col[i] for i in np.argsort(vals)]
 
@@ -485,6 +471,22 @@ def other_class(vals, col, path ):
     return coll, sort_val    
     
 def plot_falsep(path_images, f, proba, test, pred):
+    
+     """
+    Plots the segmentation of an input image using a pre-trained model, and extracts features and areas from the predicted
+    segmentation to generate a boxplot.
+
+    Args:
+    -----------
+    - path_images(str): Path to the input image file
+    - test(str): Ground truth label for the input image
+    - pred(str): Predicted label for the input image
+    - proba(numpy.ndarray): Array containing probability data for different classes
+
+    Returns:
+    --------
+    None
+    """
 
     plt.rcParams["figure.figsize"] = (10,7)
     ctx = mx.cpu(0)
@@ -568,12 +570,39 @@ def plot_falsep(path_images, f, proba, test, pred):
     plt.savefig("../Plots/nomask/plot-{}{}-{}".format(test, pred, os.path.splitext(path_images)[0].split('/')[-1]))
         
 def func(pct, allvals):
+    """
+    This function calculates the percentage contribution of 'pct' in the total sum of 'allvals' and returns
+    a formatted string with the percentage rounded off to one decimal place.
+    
+    Args:
+    --------       
+    - pct (numerical): A numerical value representing the portion of the total sum of 'allvals' for which we want to calculate the percentage.
+    - allvals (array-like): A list or array of numerical values representing the total sum from which we want to calculate the percentage.
+
+    Returns:
+    -------- 
+    - string: A formatted string with the percentage contribution of 'pct' in the total sum of 'allvals' rounded off to one decimal place.
+
+    """
     absolute = (pct*100)/np.sum(allvals)
     
     return "{:} %\n".format(round(pct, 1))
 
     
 def pie_class_plot(path_plots, results, path_images):
+        """
+    Plots the mask and image for each class and type of model to see differences,
+    and saves the resulting pie charts in the specified directory.
+
+    Args:
+    - path_plots (str): Directory to save the resulting pie charts.
+    - results (pandas.DataFrame): DataFrame with results of the model predictions.
+    - path_images (str): Directory with the images used for the predictions.
+    
+    Returns:
+    --------
+    None
+    """
     #Plot the mask and image for each class and type of model to see differences
     plt.rcParams["figure.figsize"] = (10,5)
     ctx = mx.cpu(0)
@@ -622,6 +651,19 @@ def pie_class_plot(path_plots, results, path_images):
         plt.show()
 
 def create_dataframe(cols, images_list):
+    """
+    Creates a new Pandas DataFrame with columns as specified in cols argument and the number
+    of rows as the length of the images_list argument. Adds two additional columns, "id" and "lc",
+    initialized with zeros.
+
+    Args:
+    - cols(list): A list of strings representing the names of columns to be created.
+    - images_list(list): A list of image file names.
+
+    Returns:
+    - d(DataFrame): A new Pandas DataFrame with columns as specified in cols argument
+    and the number of rows as the length of the images_list argument.
+    """
     d = pd.DataFrame(0, index=np.arange(len(images_list)), columns=cols)
     d["id"] = 0
     d['lc'] = 0
