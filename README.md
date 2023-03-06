@@ -25,7 +25,10 @@ Usage:
 
 
 Relevant links:
+
 GLUON Toolkit: https://cv.gluon.ai/ - https://github.com/dmlc/gluon-cv
+
+ADE20k Dataset: https://github.com/CSAILVision/ADE20K
 
 LUCAS Harmonized database:
   - Article:  https://www.nature.com/articles/s41597-020-00675-z
