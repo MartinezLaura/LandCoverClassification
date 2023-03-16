@@ -31,8 +31,6 @@ import cv2
 import pickle
 import ast
 
-import geopandas as gp
-
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score, ConfusionMatrixDisplay, make_scorer
 from sklearn.model_selection import GridSearchCV, StratifiedShuffleSplit, train_test_split,  RandomizedSearchCV, cross_validate, StratifiedKFold
 from sklearn.ensemble import RandomForestClassifier
@@ -472,7 +470,7 @@ def other_class(vals, col, path ):
     
 def plot_falsep(path_images, f, proba, test, pred):
     
-     """
+    """
     Plots the segmentation of an input image using a pre-trained model, and extracts features and areas from the predicted
     segmentation to generate a boxplot.
 
@@ -590,7 +588,7 @@ def func(pct, allvals):
 
     
 def pie_class_plot(path_plots, results, path_images):
-        """
+    """
     Plots the mask and image for each class and type of model to see differences,
     and saves the resulting pie charts in the specified directory.
 
