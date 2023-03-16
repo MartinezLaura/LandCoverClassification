@@ -116,7 +116,7 @@ def retrieve_ADE():
     return ADECLASSES
 
 
-def viz_segmentation(ds, predict, mask, img_path):
+def viz_segmentation(ds, predict, img_path):
     """
     Takes the input image, the predicted mask, the ground truth mask, and the path to the image and visualizes 
     the segmentation. Returns the label, color, left, and height of the visualization.
@@ -135,7 +135,9 @@ def viz_segmentation(ds, predict, mask, img_path):
     """
 
     if ds == 'ade20k':
+        mask = get_color_pallete(predict, 'ade20k')
         ade20kclass = np.unique(predict)
+        ADECLASSES = retrieve_ADE()
         label = []
         [label.append(ADECLASSES[int(i)]) for i in ade20kclass]
 
@@ -149,7 +151,9 @@ def viz_segmentation(ds, predict, mask, img_path):
         for i in ade20kclass:
             i = int(i)
             col.append([x / 255 for x in pallete[((i + 1) * 3):((i + 1) * 3 + 3)]])
-
+    else:
+        print('dataset {} not implemented'.format(ds))
+    
     return label, col, left, height
     
 def kfold(X, y, folds):
